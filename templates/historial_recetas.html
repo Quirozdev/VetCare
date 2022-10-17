@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Historial de recetas{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+{% if usuario['tipo'] == "Cliente" %}
+
+<div class="historialReceta">
+    <h1>Historial de recetas</h1>
+    <h3>Recetas</h3>
+    <table  class="table table_hover table-dark"  id="tabla_receta" data-search="true">
+        <thead >
+        <tr>
+            <th data-field="mascota" data-sortable="true">Mascota</th>
+            <th data-field="receta" data-sortable="true">Receta</th>
+            <th data-field="fecha" data-sortable="true">Fecha</th>
+            <th data-field="hora" data-sortable="true">Hora</th>
+            <th data-field="url_generar_pdf" data-sortable="true">Generar PDF</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+{% else %}
+<p>{{mensaje}}</p>
+<div class="historialReceta">
+<h1>Historial de recetas</h1>
+    <form action="" method="POST">
+
+        <div class="clienteMascota">
+            <label for="cliente_mascota">Seleccionar Cliente/Mascota</label>
+            <input type="text" id="cliente_mascota" name="cliente_mascota" list="lista_clientes_mascotas" class="col-sm-6 custom-select custom-select-sm" required>            
+        </div>
+
+        <datalist id="lista_clientes_mascotas" required> 
+            <option value="" disabled selected hidden>Selecciona un Cliente/Mascota...</option>
+            {% for cliente, mascotas in clientes_mascotas.items() %}
+                {% for mascota in mascotas %}
+                    <option value="{{cliente}} -> {{mascota['nombre']}}">Cliente: {{cliente}} y mascota: {{mascota['nombre']}}</option>
+                {% endfor %}
+            {% endfor %}
+        </datalist>
+        <input type="submit" class="enviarBoton" value="Buscar receta por cliente/mascota">
+    </form>
+    {% if mostrar_tabla_busqueda == True %}
+    <h3>Resultados de la busqueda</h3>
+    <table class="table table_hover table-dark">
+        <thead class="table-dark">
+            <tr>
+                <th>Cliente</th>
+                <th>Mascota</th>
+                <th>Receta</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Generar PDF</th>
+            </tr>
+        </thead>
+        {% for receta in lista_recetas %}
+            <tr>
+                <td>{{receta['cliente']}}</td>
+                <td>{{receta['mascota']}}</td>
+                <td>{{receta['receta']}}</td>
+                <td>{{receta['fecha']}}</td>
+                <td>{{receta['hora']}}</td>
+                <td><a href="/generar_pdf/receta/{{receta['id']}}" target="_blank">Generar PDF</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <table class="table table_hover table-dark" id="tabla_receta" data-search="true">
+        <thead>
+        <tr>
+            <th data-field="cliente" data-sortable="true">Cliente</th>
+            <th data-field="mascota" data-sortable="true">Mascota</th>
+            <th data-field="receta" data-sortable="true">Receta</th>
+            <th data-field="fecha" data-sortable="true">Fecha</th>
+            <th data-field="hora" data-sortable="true">Hora</th>
+            <th data-field="url_generar_pdf" data-sortable="true">Generar PDF</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+{% endif %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            type: "GET",
+            url: '/tabla_recetas',
+            dataType: 'json',
+            success: function(data) {
+                $('#tabla_receta').bootstrapTable({
+                    data: data
+                });
+            },
+            error: function(e) {
+                console.log(e.responseText);
+            }
+        });
+    });
+</script>
+{% endblock %}

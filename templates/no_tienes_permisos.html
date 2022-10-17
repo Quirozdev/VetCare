@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}No tienes permisos{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+    <h1>No cuentas con los suficientes permisos para acceder a esta página</h1>
+    <a href="/">Volver a la página principal</a>
+{% endblock %}

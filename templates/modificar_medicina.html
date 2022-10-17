@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Modificar medicina{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+    {% if medicina_existente == True %}
+    <div class="centerAtencion1">
+        <h1>Modificar a {{datos_medicina['nombre']}}</h1>
+        <form action="" method="POST">
+            
+            <div class="fecha">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" value="{{datos_medicina['nombre']}}" readonly>
+            </div>
+
+            <div class="fecha">
+                <label for="descripcion">Descripción</label>
+                <textarea rows="6" cols="48" id="descripcion" name="descripcion" placeholder="Esta medicina sirve para..." required>{{datos_medicina['descripcion']}}</textarea>
+            </div>
+
+            <div class="fecha">
+                <label for="presentacion">Tipo de presentación</label>
+                <input type="text" id="presentacion" name="presentacion" value="{{datos_medicina['tipo_presentacion']}}" placeholder="Pomada, Pastillas, Jarabe, ..." required>
+            </div>
+
+            <div class="fecha">
+                <label for="medida">Tipo de medida:</label>
+                <input type="text" id="medida" name="medida" value="{{datos_medicina['tipo_medida']}}" placeholder="mg, ml, ..." required>
+            </div>
+
+            <input type="submit" class="submitButton" value="Modificar medicina">
+        </form>
+    </div>
+    {% else %}
+    <h2>Esa medicina no se encuentra registrada en el sistema</h2>
+    <a href="/medicinas/">Volver a la lista de medicinas</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Agregar receta{% endblock %}
+{% block head %}
+{{super()}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+#medicinas > div {
+    margin: 10px;
+}
+</style>
+{% endblock %}
+{% block body %}
+<div class="center4">
+    <h1>Agregar receta</h1>
+    <p>{{mensaje}}</p>
+    <form action="" method="POST">
+
+        <div class="txtField">
+            <input type="text" id="cliente_mascota" name="cliente_mascota" list="lista_clientes_mascotas" class="col-sm-6 custom-select custom-select-sm" required>
+            <span></span>
+            <label for="cliente_mascota">Seleccionar Cliente/Mascota</label>
+        </div>
+
+        <datalist id="lista_clientes_mascotas" required> 
+            <option value="" disabled selected hidden>Selecciona un Cliente/Mascota...</option>
+            {% for cliente, mascotas in clientes_mascotas.items() %}
+                {% for mascota in mascotas %}
+                    <option value="{{cliente}} -> {{mascota['nombre']}}">Cliente: {{cliente}} y mascota: {{mascota['nombre']}}</option>
+                {% endfor %}
+            {% endfor %}
+        </datalist>
+
+        <div id="medicinas">            
+                <div class="txtField">
+                    <input type="text" id="medicina1" name="medicina1" list="lista_medicinas" required>
+                    <span></span>                    
+                    <label for="medicina1">Medicina</label>
+                </div>
+
+                <datalist id="lista_medicinas">
+                    <option value="" disabled selected hidden>Selecciona una medicina...</option>
+                    {% for id, medicina in medicinas.items() %}
+                        <option value="{{medicina['nombre']}}">Medicina {{medicina['nombre']}}: {{medicina['descripcion']}}</option>
+                    {% endfor %}
+                </datalist>
+
+                <div class="clienteMascota">
+                    <label for="cantidad1">Cantidad</label>                    
+                    <input type="number" id="cantidad1" name="cantidad1" required>
+                </div>            
+
+                <button  class="submitButton" id="agregar_medicina">Agregar medicina</button>
+        </div>
+
+        <div class="txtField">
+        <input type="date" id="fecha" name="fecha" required>        
+        </div>    
+        
+        <div class="txtField">
+        <input type="time" id="hora" name="hora" required>        
+        </div>
+
+        <input type="submit" class="submitButton" name="agregar_receta" value="Agregar receta">
+    </form>
+    
+</div>
+    <script>
+        // todo este javascript es para crear agregar dinamicamente campos para agregar medicinas a la receta
+        // obtenemos el elemento del botón de agregar
+        botonAgregar = document.getElementById("agregar_medicina");
+        // le agregamos un event listener al hacer click en el, asociandole la función de agregarMedicina
+        botonAgregar.addEventListener('click', agregarMedicina);
+
+
+        function agregarMedicina(e) {
+            // obtenemos el div con todas los inputs de las medicinas
+            medicinas = document.getElementById("medicinas")
+            //aquí obtenemos todos los elementos div que hay dentro del div de medicinas, cada uno de esos div
+            // es una medicina, por lo que con la propiedad .length obtenemos el contador de las medicinas que se han agregado al formulario
+            cantidad_de_medicinas = medicinas.getElementsByTagName('div').length
+            // esta variable va a contener a un nuevo div medicina, que se va a crear dinamicamente, cambiando la id cada vez que se agregue una,
+            // la medicina que ya se encuentra en el formulario y es obligatoria es la 1, se suma 1 a la cantidad de medicinas para asignar ese
+            // valor como id a la siguiente medicina a agregar.
+            // también con ayuda de flask vamos creando los datos a seleccionar en el datalist y asignando dinamicamente las id y names
+            let medicina_cantidad = 
+            `
+            <div>
+                <label for="medicina${cantidad_de_medicinas + 1}">Medicina:</label>
+                <input type="text" id="medicina${cantidad_de_medicinas + 1}" name="medicina${cantidad_de_medicinas + 1}" list="lista_medicinas">
+                <datalist id="lista_medicinas">
+                    <option value="" disabled selected hidden>Selecciona una medicina...</option>
+                    {% for id, medicina in medicinas.items() %}
+                        <option value="{{medicina['nombre']}}">Medicina {{medicina['nombre']}}: {{medicina['descripcion']}}</option>
+                    {% endfor %}
+                </datalist>
+                <label for="cantidad${cantidad_de_medicinas + 1}">Cantidad:</label>
+                <input type="number" id="cantidad${cantidad_de_medicinas + 1}" name="cantidad${cantidad_de_medicinas + 1}">
+                <label for="cancelar_medicina${cantidad_de_medicinas + 1}">
+                <input type="checkbox" id="cancelar_medicina${cantidad_de_medicinas + 1}" name="cancelar_medicina${cantidad_de_medicinas + 1}" value="medicina_cancelada">Cancelar medicina</label>
+            </div>
+            `;
+            // creamos un div, que va a representar una medicina
+            medicina = document.createElement('div');
+            // a ese div le ponemos el HTML en la variable medicina_cantidad
+            medicina.innerHTML = medicina_cantidad;
+            // agregamos ese div/medicina al div de medicinas, haciendolo de esta manera no se resetean los valores de los demas inputs de
+            // medicinas
+            medicinas.appendChild(medicina);
+            // esta forma no se utilizó al final porque reseteaba los valores de todos los inputs de medicina al agregar una medicina a la receta
+            // medicinas.innerHTML += medicina_cantidad;
+        }
+    </script>
+{% endblock %}

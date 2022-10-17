@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Modificar cita{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+    {% if cita_existente == True %}
+    <div class="center5">
+        <h1>Modificar cita {{datos_cita['id']}}</h1>
+        <form action="" method="POST">
+            <div class="fecha">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id" value="{{datos_cita['id']}}" readonly>
+            </div>
+
+            <div class="fecha">
+            <label for="nombre_cliente">Nombre del cliente</label>
+            <input type="text" id="nombre_cliente" name="nombre_cliente" value="{{datos_cita['nombre_cliente']}}" readonly>
+            </div>
+
+            <div class="fecha">
+            <label for="nombre_mascota">Nombre de la mascota</label>
+            <input type="text" id="nombre_mascota" name="nombre_mascota" value="{{datos_cita['nombre_mascota']}}" readonly>
+            </div>
+
+            <div class="fecha">
+            <label for='fecha'>Fecha </label>
+            <input type="date" id="fecha" name="fecha" required>
+            </div>
+
+            <div class="fecha">
+            <label for='hora'>Hora (De 9:00 a 18:00)</label>
+            <input type="time" id="hora" name="hora" min="09:00" max="18:00" required>
+            </div>
+
+            <div class="fecha">
+            <label for="id_servicio">Seleccionar servicio</label>
+            <input type="text" id="id_servicio" name="id_servicio" list="lista_servicios" class="col-sm-6 custom-select custom-select-sm" required>
+            
+
+            <datalist id="lista_servicios" required> 
+                <option value="" disabled selected hidden>Selecciona un servicio...</option>
+                    {% for id, servicio in servicios.items() %}
+                        <option value="{{id}}">{{servicio['tipo_servicio']}} - {{servicio['servicio']}}</option>
+                    {% endfor %}
+            </datalist>
+            </div>
+
+            <input type="submit" class="submitButton" value="Modificar cita">
+        </form>
+    </div>
+    {% else %}
+    <h2>Esa cita no se encuentra registrada en el sistema</h2>
+    <a href="/agendar_cita/">Volver a la lista de citas</a>
+    {% endif %}
+{% endblock %}

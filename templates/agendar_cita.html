@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% block title %}Agendar cita{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+
+{% block body %}
+<p>{{mensaje}}</p>
+{% if usuario['tipo'] == 'Cliente' %}
+
+<div class="center2">
+  <h1>Agendar cita</h1>
+    <form action="" method="POST">
+
+        <div class="fecha">
+          <label for='fecha'>Fecha</label>
+          <input type="date" id="fecha" name="fecha" required>
+        </div>
+
+        <div class="horarios">
+          <label for='hora'>Hora</label>
+          <input type="time" id="hora" name="hora" min="09:00" max="18:00" required>
+        </div>
+
+        <p class="horario">Horario de atencion de 9am a 6pm</p>
+
+        <div class="txtField">
+          <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+          <span></span>
+          <label for='nombreM'>Nombre de la mascota</label>
+        </div>  
+        
+        <div class="txtField">
+          <input type="text" id="tipo_mascota" name="tipo_mascota" required>
+          <span></span>
+          <label for='tipoM'>Tipo de mascota</label>
+        </div>
+
+        <div class="txtField">
+          <input type="text" id="id_servicio" name="id_servicio" list="lista_servicios" class="col-sm-6 custom-select custom-select-sm" required>
+          <span></span>
+          <label for="id_servicio">Seleccionar servicio</label>
+        </div>
+
+        <datalist id="lista_servicios" required> 
+          <option value="" disabled selected hidden>Selecciona un servicio...</option>
+          {% for id, servicio in servicios.items() %}
+              <option value="{{id}}">{{servicio['tipo_servicio']}} - {{servicio['servicio']}}</option>
+          {% endfor %}
+        </datalist>
+        <input class="submitButton" type="submit" name="agendar" value="Agendar">
+    </form>
+</div>
+
+<div class="historialAtencionCliente">
+  <h1>Citas</h1>
+  <table class="table table-dark" id="tabla_cita" data-search="true">
+    <thead>
+      <tr>
+        <th data-field="id" data-sortable="true">ID</th>
+        <th data-field="nombre_mascota" data-sortable="true">Nombre de la mascota</th>
+        <th data-field="fecha" data-sortable="true">Fecha</th>
+        <th data-field="hora" data-sortable="true">Hora</th>
+        <th data-field="servicio" data-sortable="true">Servicio</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+{% else %}
+
+<div class="center3">
+<h1>Agendar cita</h1>
+<form action="" method="POST">
+
+    <div class="fecha">    
+      <label for="cliente_mascota">Seleccionar Cliente/Mascota:</label>
+      <input type="text" id="cliente_mascota" name="cliente_mascota" list="lista_clientes_mascotas" class="col-sm-6 custom-select custom-select-sm" required>
+      <datalist id="lista_clientes_mascotas" required> 
+          <option value="" disabled selected hidden>Selecciona un Cliente/Mascota...</option>
+          {% for cliente, mascotas in clientes_mascotas.items() %}
+              {% for mascota in mascotas %}
+                  <option value="{{cliente}} -> {{mascota['nombre']}}">Cliente: {{cliente}} y mascota: {{mascota['nombre']}}</option>
+              {% endfor %}
+          {% endfor %}
+      </datalist>
+    </div>
+
+    <div class="fecha">
+      <label for='fecha'>Fecha: </label>
+      <input type="date" id="fecha" name="fecha" required>
+    </div>
+
+    <div class="horarios">
+      <label for='hora'>Hora:</label>
+      <input type="time" id="hora" name="hora" min="09:00" max="18:00" required>
+    </div>
+
+    <p class="horario">Horario de atencion de 9am a 6pm</p>
+
+    <div class="fecha">
+      <label for="id_servicio">Seleccionar servicio:</label>
+      <input type="text" id="id_servicio" name="id_servicio" list="lista_servicios" class="col-sm-6 custom-select custom-select-sm" required>
+      <datalist id="lista_servicios" required> 
+          <option value="" disabled selected hidden>Selecciona un servicio...</option>
+          {% for id, servicio in servicios.items() %}
+              <option value="{{id}}">{{servicio['tipo_servicio']}} - {{servicio['servicio']}}</option>
+          {% endfor %}
+      </datalist>
+    </div>
+
+    <input type="submit" class="submitButton" name="agendar" value="Agendar cita">
+
+</form>
+</div>
+  <div class="usuarioAgregar">
+  <div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      Agregar usuario y mascota
+    </a>
+    <div class="dropdown-menu">
+        <form class="px-4 py-3" action="" method="POST">
+          <div class="mb-3">
+            <label for="nombre_corto" class="form-label">Nombre corto para cliente (username):</label>
+            <input type="text" class="form-control" id="nombre_corto" name="nombre_corto" required>
+          </div>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del cliente:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="mb-3">
+            <label for="nombre_mascota" class="form-label">Nombre de la mascota:</label>
+            <input type="text" class="form-control" id="nombre_mascota" name="nombre_mascota" required>
+          </div>
+          <div class="mb-3">
+            <label for="tipo_mascota" class="form-label">Tipo de la mascota:</label>
+            <input type="text" class="form-control" id="tipo_mascota" name="tipo_mascota" placeholder="Perro, Gato, ..." required>
+          </div>
+          <input type="submit" class="submitButton" name="agregar_usuario_mascota" value="Agregar">
+        </form>
+      </div>
+  </div>
+  </div>
+
+  <div class="agregaMascota">
+  <div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      Agregar mascota
+    </a>
+    <div class="dropdown-menu">
+        <form class="px-4 py-3" action="" method="POST">
+          <div class="mb-3">
+            <label for="username_cliente">Seleccionar Cliente</label>
+            <input type="text" id="username_cliente" name="username_cliente" list="lista_clientes" class="col-sm-6 custom-select custom-select-sm" required>
+            <datalist id="lista_clientes" required> 
+              <option value="" disabled selected hidden>Selecciona un Cliente...</option>
+              {% for nombre_corto, cliente in usuarios.items() %}
+                  {% if cliente['tipo'] == "Cliente" %}
+                      <option value="{{nombre_corto}}">Cliente: {{nombre_corto}}</option>
+                  {% endif %}
+              {% endfor %}
+          </datalist>
+        </div>
+          <div class="mb-3">
+            <label for="nombre_mascota" class="form-label">Nombre de la mascota:</label>
+            <input type="text" class="form-control" id="nombre_mascota" name="nombre_mascota" required>
+          </div>
+          <div class="mb-3">
+            <label for="tipo_mascota" class="form-label">Tipo de la mascota:</label>
+            <input type="text" class="form-control" id="tipo_mascota" name="tipo_mascota" placeholder="Perro, Gato, ..." required>
+          </div>
+          <input type="submit" class="btn btn-primary" name="agregar_mascota" value="Agregar mascota">
+        </form>
+      </div>
+  </div>
+  </div>
+
+<div class="historialAtencionCliente">
+  <h1>Citas</h1>
+<table class="table table_hover table-dark" id="tabla_cita" data-search="true">
+  <thead>
+    <tr>
+      <th data-field="id" data-sortable="true">ID</th>
+      <th data-field="nombre_cliente" data-sortable="true">Nombre del cliente</th>
+      <th data-field="nombre_mascota" data-sortable="true">Nombre de la mascota</th>
+      <th data-field="fecha" data-sortable="true">Fecha</th>
+      <th data-field="hora" data-sortable="true">Hora</th>
+      <th data-field="servicio" data-sortable="true">Servicio</th>
+      <th data-field="url_modificacion" data-sortable="true">Modificar</th>
+    </tr>
+  </thead>
+</table>
+</div>
+{% endif %}
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+      $.ajax({
+          type: "GET",
+          url: '/tabla_citas',
+          dataType: 'json',
+          success: function(data) {
+              $('#tabla_cita').bootstrapTable({
+                  data: data
+              });
+          },
+          error: function(e) {
+              console.log(e.responseText);
+          }
+      });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atencion</title>
+    <style>
+    body {
+        text-align: center;
+    }
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    p {
+        font-size: 20px;
+    }
+    </style>
+</head>
+<body>
+    {% if atencion_existente == True %}
+        <img src="/static/images/logo_equipo.png" alt="Logo del equipo"/>
+        <h1>VetCare</h1>
+        <h2>Atención del cliente {{atencion_a_buscar['cliente']}} para su mascota {{atencion_a_buscar['mascota']}}</h2>
+        <h3>Atención agendada para el día {{atencion_a_buscar['fecha']}} a las {{atencion_a_buscar['hora']}}</h3>
+        <p><strong>ID de la atención:</strong> {{atencion_a_buscar['id']}}</p>
+        <p><strong>Diagnóstico:</strong> {{atencion_a_buscar['diagnostico']}}</p>
+        <p><strong>Subtotal:</strong> {{atencion_a_buscar['subtotal']}}</p>
+        <p><strong>IVA:</strong> {{atencion_a_buscar['iva']}}</p>
+        <p><strong>Total:</strong> {{atencion_a_buscar['total']}}</p>
+    {% else %}
+    <h1>Esa atención no existe</h1>
+    <a href="/historial_atenciones">Volver a historial de atenciones</a>
+    {% endif %}
+</body>
+</html>

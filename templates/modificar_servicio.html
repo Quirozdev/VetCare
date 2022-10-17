@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Modificar servicio{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+    {% if servicio_existente == True %}
+        <h1>Modificar servicio {{datos_servicio['id']}}</h1>
+        <form action="" method="POST">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" value="{{datos_servicio['id']}}" readonly>
+            <label for="tipo_servicio" class="form-label">Tipo de servicio:</label>
+                <select id="tipo_servicio" name="tipo_servicio" required>
+                    {% if datos_servicio['tipo_servicio'] == "Veterinaria" %}
+                    <option value="Veterinaria" selected>Veterinaria</option>
+                    <option value="Estetica">Estetica</option>
+                    {% else %}
+                    <option value="Veterinaria">Veterinaria</option>
+                    <option value="Estetica" selected>Estetica</option>
+                    {% endif %}
+                </select>
+            <label for="servicio" class="form-label">Servicio:</label>
+            <input type="text" id="servicio" name="servicio" class="col-sm-6 custom-select custom-select-sm" required>
+            <input type="submit" class="btn btn-primary" value="Modificar servicio">
+        </form>
+    {% else %}
+    <h2>Ese servicio no se encuentra registrado en el sistema</h2>
+    <a href="/servicios/">Volver a la lista de servicios</a>
+    {% endif %}
+{% endblock %}

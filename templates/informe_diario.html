@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Informe diario{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+<div class="historialReceta">
+  <h1>Informe diario</h1>
+<form action="" method="POST">
+
+    <div class="txtdia">
+        <label for='fecha'>Fecha </label>
+        <input type="date" id="fecha" name="fecha" required>    
+    </div>
+
+    <input type="submit" class="BotonDia" value="Obtener ventas de ese dia">
+</form>
+{% if ventas_encontradas != False %}
+    {% if mostrar_tabla_busqueda == True %}
+    <h3>Ventas del dia {{dia}}</h3>
+    <table class="table table_hover table-dark">
+        <thead class="table-dark">
+            <tr>
+                <th>Cliente</th>
+                <th>Mascota</th>
+                <th>Diagnostico</th>
+                <th>Hora</th>
+                <th>Subtotal</th>
+                <th>IVA</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        {% for venta in ventas %}
+            <tr>
+                <td>{{venta['cliente']}}</td>
+                <td>{{venta['mascota']}}</td>
+                <td>{{venta['diagnostico']}}</td>
+                <td>{{venta['hora']}}</td>
+                <td>{{venta['subtotal']}}</td>
+                <td>{{venta['iva']}}</td>
+                <td>{{venta['total']}}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>Sumatoria</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong>{{sumatoria['suma_subtotales']}}</strong></td>
+            <td><strong>{{sumatoria['suma_ivas']}}</strong></td>
+            <td><strong>{{sumatoria['suma_totales']}}</strong></td>
+        </tr>
+    </table>
+    <a href="/generar_pdf/informe_diario/{{dia}}" target="_blank">Generar PDF</a>
+</div>
+    {% endif %}
+{% else %}
+<h3>No hubo ventas el dia {{dia}}</h3>
+{% endif %}
+{% endblock %}

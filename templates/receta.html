@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receta</title>
+    <style>
+    body {
+        text-align: center;
+    }
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    p {
+        font-size: 20px;
+    }
+    </style>
+</head>
+<body>
+    {% if receta_existente == True %}
+        <img src="/static/images/logo_equipo.png" alt="Logo del equipo"/>
+        <h1>VetCare</h1>
+        <h2>Receta para el cliente {{receta_a_buscar['cliente']}} y su mascota {{receta_a_buscar['mascota']}}</h2>
+        <p><strong>ID de la receta:</strong> {{receta_a_buscar['id']}}</p>
+        <p>Receta propuesta para el día {{receta_a_buscar['fecha']}} a las {{receta_a_buscar['hora']}}</p>
+        <p>Receta:</p>
+        <p>{{receta_a_buscar['receta']}}</p>
+    {% else %}
+    <h1>Esa receta no existe</h1>
+    <a href="/historial_recetas">Volver a historial de recetas</a>
+    {% endif %}
+</body>
+</html>

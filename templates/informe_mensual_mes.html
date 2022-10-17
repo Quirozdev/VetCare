@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
+    <title>Informe {{mes}} {{anio}}</title>
+</head>
+<body>
+    {% if ventas_encontradas != False %}
+    <img src="/static/images/logo_equipo.png" alt="Logo del equipo" style="width: 150px;"/>
+    <h1>VetCare</h1>
+    <h2>Ventas del mes de {{mes}} en el año {{anio}}</h2>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Cliente</th>
+                <th>Mascota</th>
+                <th>Diagnostico</th>
+                <th>Fecha</th>
+                <th>Subtotal</th>
+                <th>IVA</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        {% for venta in ventas %}
+            <tr>
+                <td>{{venta['cliente']}}</td>
+                <td>{{venta['mascota']}}</td>
+                <td>{{venta['diagnostico']}}</td>
+                <td>{{venta['fecha']}}</td>
+                <td>{{venta['subtotal']}}</td>
+                <td>{{venta['iva']}}</td>
+                <td>{{venta['total']}}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>Sumatoria</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong>{{sumatoria['suma_subtotales']}}</strong></td>
+            <td><strong>{{sumatoria['suma_ivas']}}</strong></td>
+            <td><strong>{{sumatoria['suma_totales']}}</strong></td>
+        </tr>
+    </table>
+{% else %}
+<h3>No hubo ventas el mes de {{mes}} en el año {{anio}}</h3>
+{% endif %}
+</body>
+</html>

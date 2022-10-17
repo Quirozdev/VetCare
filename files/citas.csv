@@ -1,0 +1,9 @@
+id,nombre_cliente,nombre_mascota,fecha,hora,id_servicio
+0,agregado,xdd,2022-04-28,17:37,2
+1,duenio_prueba,toro,2022-04-26,10:25,1
+2,hola,Garfield,2022-04-30,09:14,0
+3,Satoshi,Loreto,2022-04-30,10:30,2
+4,Satoshi,Loreto,2022-04-30,17:40,0
+5,Satoshi,Loreto,2022-05-28,17:12,7
+6,Julio,Fifi,2022-05-19,14:03,6
+7,agregado,Pi,2022-05-19,17:04,2

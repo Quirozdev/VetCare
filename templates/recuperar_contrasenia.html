@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Recuperar contraseña{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}    
+    {% if mostrar_toast == True %}
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;">
+            <div class="toast-header">
+                <img src="{{icono}}" class="rounded me-2" alt="...">
+                <strong class="me-auto">{{asunto_mensaje}}</strong>
+            </div>
+            <div class="toast-body">
+                {{mensaje}}
+            </div>
+        </div>
+    {% endif %}
+    <div class="center">
+        <h1>Recuperar contraseña</h1>
+        <form action="" method="POST">
+            
+            <div class="txtField">                
+                <input type="email" id="correo" name="correo" required>
+                <span></span>
+                <label for="correo">Ingresa tu correo electrónico</label>
+            </div>
+            
+            <input class="submitButton" type="submit" value="Enviar correo de recuperación">
+        </form>
+    </div>
+{% endblock %}

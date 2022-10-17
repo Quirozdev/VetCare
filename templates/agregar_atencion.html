@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Agregar atención{% endblock %}
+{% block head %}
+{{super()}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+{% endblock %}
+{% block body %}
+<div class="centerAtencion">
+    <h1>Agregar atención</h1>
+    <p>{{mensaje}}</p>
+    <form action="" method="POST">
+
+        <div class="fecha">
+            <label for="cliente_mascota">Seleccionar Cliente/Mascota</label>
+            <input type="text" id="cliente_mascota" name="cliente_mascota" list="lista_clientes_mascotas" class="col-sm-6 custom-select custom-select-sm" required>
+        
+
+        <datalist id="lista_clientes_mascotas" required> 
+            <option value="" disabled selected hidden>Selecciona un Cliente/Mascota...</option>
+            {% for cliente, mascotas in clientes_mascotas.items() %}
+                {% for mascota in mascotas %}
+                    <option value="{{cliente}} -> {{mascota['nombre']}}">Cliente: {{cliente}} y mascota: {{mascota['nombre']}}</option>
+                {% endfor %}
+            {% endfor %}
+        </datalist>
+        </div>
+        
+        <div class="fecha">
+            <label for='fecha'>Fecha</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div> 
+
+        <div class="fecha">
+            <label for='hora'>Hora</label>
+            <input type="time" id="hora" name="hora" required>
+        </div>
+
+        <div class="fecha">
+            <label for="diagnostico">Descripción del malestar y diagnóstico</label>
+            <textarea rows="6" cols="48" id="diagnostico" name="diagnostico" placeholder="Malestar de la mascota y diagnostico recetado" required></textarea>
+        </div>
+
+        <div class="fecha">
+            <label for='subtotal'>Subtotal (2 decimales)</label>
+            <input type="number" id="subtotal" name="subtotal" step="0.01" placeholder="929.99" required>
+        </div>
+
+        <div class="fecha">
+            <label for='iva'>IVA:</label>
+            <input type="number" id="iva" name="iva" step="0.01" readonly required>
+        </div>
+
+        <div class="fecha">
+        <label for='total'>Total:</label>
+        <input type="number" id="total" name="total" step="0.01" readonly required>
+        </div>
+
+        <input type="submit" class="submitButton" name="agregar_atencion" value="Agregar atención">
+    </form>
+</div>
+    <script>
+        // codigo JavaScript para llenar automaticamente los campos de IVA y Total cuando el campo de Subtotal cambia
+        // se obtienen los 3 inputs
+        const subtotal = document.getElementById('subtotal');
+        const iva = document.getElementById('iva');
+        const total = document.getElementById('total');
+        // se le agrega un event listener al input del subtotal, que cuando detecta un cambio llama a la funcion actualizarValor()
+        subtotal.addEventListener('input', actualizarValor);
+
+        function actualizarValor(e) {
+            // hay que castear el valor a tipo númerico para poder operar con el
+            valor_subtotal = Number(e.target.value)
+            // validamos que tras la conversion, el tipo sea numerico y que no sea un valor vacio
+            if (typeof valor_subtotal == 'number' && valor_subtotal != "") {
+                // asignamos los valores a los 2 campos, para el iva se multiplica por .16
+                // también les aplicamos la función toFixed para que nos redondee los valores a 1-2 decimales máximo, 
+                // luego le aplicamos parseFloat porque toFixed regresa un string
+                iva.value = parseFloat((valor_subtotal * .16).toFixed(2));
+                // aqui el iva se tiene que castear a numero para que no sea tomado como string
+                total.value = parseFloat((valor_subtotal + Number(iva.value)).toFixed(2));
+            }
+        }
+    </script>
+{% endblock %}

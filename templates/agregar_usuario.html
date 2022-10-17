@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Agregar usuario{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+    <div class="center4">
+        <h1>Agregar usuario</h1>
+        <p>{{mensaje}}</p>
+        <form action="" method="POST">
+            
+            <div class="txtField">
+                <input type="text" id="nombre_corto" name="nombre_corto" required>
+                <span></span>
+                <label for="nombre_corto">Nombre corto</label>
+            </div>
+
+            <div class="txtField">
+                <input type="text" id="nombre" name="nombre" required>
+                <span></span>
+                <label for="nombre">Nombre</label>
+            </div>
+
+            <div class="txtField">
+                <input type="email" id="email" name="email" required>
+                <span></span>
+                <label for="email">Email</label>
+            </div>
+
+            <div class="txtField">
+                <input type="password" id="password" name="password" required/>
+                <span></span>
+                <label for="password">Contraseña</label>
+            </div>
+
+            <div class="tipoUsuario">
+                <label for="tipo">Tipo</label>                
+                <select name="tipo" id="tipo" required>                
+                    <option value="Cliente" selected>Cliente</option>
+                    <option value="Usuario">Usuario</option>
+                    <option value="Administrador">Administrador</option>
+                </select>
+            </div>
+
+            <input type="submit" class="submitButton" value="Agregar usuario">
+        </form>
+    </div>
+{% endblock %}

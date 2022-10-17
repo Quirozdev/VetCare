@@ -1,0 +1,8 @@
+id,cliente,mascota,fecha,hora,diagnostico,subtotal,iva,total
+0,hola,Garfield,2022-04-29,01:24,Estaba un poco enfermo de... y se le diagnostic� un poco de Vetramil...,350.0,56.0,406.0
+1,prueba_citas,chanfles,2022-04-27,00:56,Se le dió un masaje a la mascota,78.65,12.58,91.23
+2,duenio_prueba,toro,2022-04-29,02:53,Se le hizo una limpieza general,467.89,74.86,542.75
+3,prueba_citas,chanfles,2022-04-27,06:25,Como diagnóstico...,76.5,12.24,88.74
+4,agregado,xdd,2022-04-27,02:07,Se le diagnosticó un poco de fiebre...,122.3,19.57,141.87
+5,hola,Garfield,2022-04-07,02:30,Se le diagnosticó Doxicilina...,356.67,57.07,413.74
+6,Julio,Rocky,2022-05-05,23:52,La mascota ten�a fatiga visual y se le diagnostic�...,567.25,90.76,658.01

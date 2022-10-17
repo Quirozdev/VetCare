@@ -1,0 +1,34 @@
+nombre_corto,nombre,email,password,tipo
+
+admin,administrador,prueba@prueba.com,$5$rounds=535000$WbBedcZvvLYrYthE$Eg3sApoq81I15pJ/Z3ETjBMLZpmHqyGl1WAoqAiqIs8,Administrador
+
+Issam,Jimenez,issamjimenez.98@gmail.com,$5$rounds=535000$9BJO/6wTHPc9jndQ$Od.Tc2WqRw4/kCWxzTwfoGl43cxUGIlrYco32.kIfu3,Administrador
+
+luis123,Luis Osuna,osunadaniel39@gmail.com,$5$rounds=535000$i.PQn4hX864NNIqG$haZ.feciQaB3uVOmLfo.CCRcqAQZrHlx1eaqDPs5IN0,Usuario
+
+pruebaa,prueba234,existo@prueba.com,$5$rounds=535000$QNEdLiKnwI4f7iSE$OWLDiH8St8JoOwurGBZYa1wAtFpg3Ii0wQv43KCC3Y3,Usuario
+
+prueba2,pruebados,si@gmail.com,$5$rounds=535000$M16E4dBcZGdyuqh2$xDZePZMYgSvSI.eMN6//11.VFaVlCv6UI3gMIDc3Ol.,Usuario
+
+prueba33,prueba3,prueba3correo@gmail.com,$5$rounds=535000$GttYjMM6h2/fkLMQ$bzIbO0uEI9omXqtEtT7no7MalrYPfA1ANh.OyTbHGp.,Usuario
+
+registro_prueba,reg,reg@gmail.com,$5$rounds=535000$0el3nxlszOgSeNCH$jRkqPr2f9DBA0yO4ZRKmp/kivRjISn4s6iAi1d.3Sp/,Usuario
+
+duenio_prueba,si,a@hotmail.com,$5$rounds=535000$5VMlF2ebdPBUIWQx$z.SCINDQbhO6Ks3z3Wj6ObISWq08D2VW7KulynqEbRB,Cliente
+
+prueba4,prueba44,prueba4@gmail.com,$5$rounds=535000$FiH2IaZJFM0ZI1Ge$Bck3Jcux9OpdynyHUVlQXsohlqND0v2g6AtyUGdp725,Cliente
+
+hola,holausuario,hola@gmail.com,$5$rounds=535000$362IE6xPV7ZFoa1a$DO66DSdi45NHUbs4Uekib0iopwuE8.zkuHB03QGGzX1,Cliente
+
+prueba_citas,c,citasprueba@gmail.com,$5$rounds=535000$UGBBaIMCziScLQcV$6OAIzhNuuKVGED1by726UZnFYGUEze8aC8quGLUuVcD,Cliente
+
+agregado,agg,agg@gmail.com,$5$rounds=535000$xXpP5QaqWTJrwsFi$WawoxerA1/rKuZ3Tr7G0zm8vawTwIY67Txq.ZKqGuS1,Cliente
+
+Satoshi,Satoshi Jimenez,issam.goyito@gmail.com,$5$rounds=535000$W1cfe4nPt7.GP9Ho$k/PdD7pEtHhB8z3Rzmx4z8kfeI8j5lQghNiE8x9VnD9,Cliente
+
+JAngel,Julio Angel,julio@gmail.com,$5$rounds=535000$BotdViLmGWuKZmpN$0ZISFHe5HtA7nLwVNgaPm91kqCymlXGPp5k3vnONdd2,Cliente
+
+manuel23,Manuel,manuel23@gmail.com,$5$rounds=535000$TYDVxPdsp/wW4JGe$r5WbA00nvKvisMTrmfrrU.mlZHIkkRTsdE7YANFxrz8,Cliente
+
+daniel34,Daniel,daniel34@gmail.com,$5$rounds=535000$AGAbLM4bDT2vb8xC$sLzJmFBmrCqyJmdWACZ.qIgOI.7WEe0TRAGcYdrp9B5,Cliente
+

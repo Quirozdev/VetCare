@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Receta agregada{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+<div>
+  <h1>Receta agregada con éxito</h1>
+</div>
+<a href="/generar_pdf/receta/{{id_receta}}" target="_blank">Generar PDF</a>
+<a href="/agregar_receta/">Agregar más recetas</a>
+{% endblock %}

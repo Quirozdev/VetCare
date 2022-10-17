@@ -1,0 +1,32 @@
+id,cliente,mascota,receta,fecha,hora
+
+0,agregado,vainilla,"-Vetramil 6g, -prueba 9gr",2022-04-26,19:54
+
+1,hola,Garfield,"-prueba2 87m",2022-04-26,17:40
+
+2,prueba_citas,chanfles,-Vetramil 87g -prueba2 45m,2022-04-30,17:12
+
+3,agregado,xdd,-Vetramil 78g -prueba 54gr,2022-04-27,19:35
+
+4,agregado,vainilla,"-prueba2 51m, -Vetramil 75g",2022-04-27,18:42
+
+5,duenio_prueba,toro,"-Vetramil 6g,-prueba 43gr",2022-04-27,18:42
+
+6,prueba_citas,chanfles,"-Vetramil 64g, -prueba2 54m, -prueba No especificadagr, -prueba 73gr",2022-04-29,23:42
+
+7,hola,Garfield,"-Vetramil 54g, -prueba2 41m",2022-04-27,21:44
+
+8,agregado,vainilla,"-prueba 54gr",2022-04-27,20:44
+
+9,duenio_prueba,toro,-Vetramil 67g,2022-04-27,22:12
+
+10,hola,Garfield,"-Vetramil 64g, -Vetramil 12g, -prueba 3215gr, -prueba2 1231m, -Vetramil 56g",2022-04-27,23:14
+
+11,agregado,vainilla,"-Vetramil 54g, -prueba cantidad no especificada en gr, -Vetramil 31g, -prueba2 13m",2022-04-27,12:16
+
+12,Satoshi,Loreto,-Vetramil 7g,2022-04-30,10:50
+
+13,agregado,xdd,-Vetramil 1g,2022-04-30,14:52
+
+14,prueba_citas,chanfles,"-Amoxicilina 4gr, -Doxicilina 4ml",2022-05-31,15:39
+

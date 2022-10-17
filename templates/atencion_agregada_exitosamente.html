@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Atencion agregada{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+<div>
+  <h1>Atención agregada con éxito</h1>
+</div>
+<a href="/generar_pdf/atencion/{{id_atencion}}" target="_blank">Generar PDF</a>
+<a href="/agregar_atencion/">Agregar más atenciones</a>
+{% endblock %}

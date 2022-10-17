@@ -1,0 +1,9 @@
+id,tipo_servicio,servicio
+0,Veterinaria,Cura
+1,Estetica,Limpiado
+2,Estetica,Pintado de pelo
+3,Estetica,Corte de pelo
+4,Veterinaria,Desparasitar
+5,Estetica,Recorte de uñas
+6,Veterinaria,Masaje relajante
+7,Veterinaria,Limpieza del canal auditivo

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Informe mensual{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+
+<div class="divMensual">
+    <h1>Informe mensual</h1>
+    <form action="" method="POST">
+
+        <div class="clienteMascota">
+            <label for='mes'>Mes</label>
+            <select name="mes" id="mes">
+        </div>
+
+        {% for mes in meses %}
+            <option value="{{mes}}">{{mes}}</option>
+        {% endfor %}
+        
+        </select>
+
+        <div class="txtanio">
+            <label for="anio">Año</label>
+            <input type="number" id="anio" name="anio" required>    
+        </div>
+
+        <input type="submit" class="BotonMes" value="Obtener ventas por mes">
+    </form>
+
+    {% if ventas_encontradas != False %}
+        {% if mostrar_tabla_busqueda == True %}
+        <div class="tablaMes">
+            <h3>Ventas del mes de {{mes}} y {{anio}}</h3>
+            <table class="table table_hover table-dark">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Mascota</th>
+                        <th>Diagnostico</th>
+                        <th>Fecha</th>
+                        <th>Subtotal</th>
+                        <th>IVA</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                {% for venta in ventas %}
+                    <tr>
+                        <td>{{venta['cliente']}}</td>
+                        <td>{{venta['mascota']}}</td>
+                        <td>{{venta['diagnostico']}}</td>
+                        <td>{{venta['fecha']}}</td>
+                        <td>{{venta['subtotal']}}</td>
+                        <td>{{venta['iva']}}</td>
+                        <td>{{venta['total']}}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td>Sumatoria</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>{{sumatoria['suma_subtotales']}}</strong></td>
+                    <td><strong>{{sumatoria['suma_ivas']}}</strong></td>
+                    <td><strong>{{sumatoria['suma_totales']}}</strong></td>
+                </tr>
+            </table>
+            <a href="/generar_pdf/informe_mensual/{{mes}}-{{anio}}" target="_blank">Generar PDF</a>
+            
+            {% endif %}
+        </div>
+</div>
+{% else %}
+<h3>No hubo ventas el mes de {{mes}} en el año {{anio}}</h3>
+{% endif %}
+{% endblock %}

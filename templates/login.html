@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+{{super()}}
+{% endblock %}
+
+{% block body %}
+
+{% if mostrar_toast == True %}
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;">
+    <div class="toast-header">
+      <img src="{{icono}}" class="rounded me-2" alt="...">
+      <strong class="me-auto">{{asunto_mensaje}}</strong>
+    </div>
+    <div class="toast-body">
+      {{mensaje}}
+    </div>
+  </div>
+{% endif %}
+<div>
+  {% if logeado == True %}
+
+  <a href="/">Volver a la página principal</a>
+
+  {% else %}
+  
+  <div class="center">
+    <h1>Login</h1>
+    <form action="" method="POST">    
+
+      <div class="txtField">        
+        <input type="text" id="username" name="username" required>
+        <span></span>
+        <label for="username">Usuario</label>
+      </div>
+
+      <div class="txtField">        
+        <input type="password" id="password" name="password" required>
+        <span></span>
+        <label for="password">Contraseña</label>
+      </div>
+
+      <input class="submitButton" type="submit" name="send" value="Login" />
+      <div class="registro"><a href="/registrarse/">Registrarse</a></div>
+      <div class="pass"><a href="/recuperar_contrasenia/">No recuerdo mi contraseña</a></div>
+
+    </form>
+  </div>  
+
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Historial de atenciones{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+<div>
+    
+</div>
+{% if usuario['tipo'] == "Cliente" %}
+<div class="historialAtenciones">
+    <h1>Historial de atenciones</h1>
+    <h3>Atenciones</h3>
+    <table class="table table_hover table-dark" id="tabla_atencion" data-search="true">
+        <thead>
+        <tr>
+            <th data-field="mascota" data-sortable="true">Mascota</th>
+            <th data-field="diagnostico" data-sortable="true">Diagnostico</th>
+            <th data-field="fecha" data-sortable="true">Fecha</th>
+            <th data-field="hora" data-sortable="true">Hora</th>
+            <th data-field="subtotal" data-sortable="true">Subtotal</th>
+            <th data-field="iva" data-sortable="true">IVA</th>
+            <th data-field="total" data-sortable="true">Total</th>
+            <th data-field="url_generar_pdf" data-sortable="true">Generar PDF</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+{% else %}
+<p>{{mensaje}}</p>
+<div class="historialReceta">
+<h1>Historial de atenciones</h1>
+<h3>Atenciones de todos los clientes y sus mascotas</h3>
+<form action="" method="POST">
+    <div class="clienteMascota">
+    <label for="cliente_mascota">Seleccionar Cliente/Mascota</label>
+    <input type="text" id="cliente_mascota" name="cliente_mascota" list="lista_clientes_mascotas" class="col-sm-6 custom-select custom-select-sm" required>
+    </div>
+    <datalist id="lista_clientes_mascotas" required> 
+        <option value="" disabled selected hidden>Selecciona un Cliente/Mascota...</option>
+        {% for cliente, mascotas in clientes_mascotas.items() %}
+            {% for mascota in mascotas %}
+                <option value="{{cliente}} -> {{mascota['nombre']}}">Cliente: {{cliente}} y mascota: {{mascota['nombre']}}</option>
+            {% endfor %}
+        {% endfor %}
+    </datalist>
+    <input type="submit" class="enviarBoton" value="Buscar atencion por cliente/mascota">
+</form>
+{% if mostrar_tabla_busqueda == True %}
+<h3>Resultados de la busqueda</h3>
+<table class="table table_hover table-dark">
+    <thead class="table-dark">
+        <tr>
+            <th>Cliente</th>
+            <th>Mascota</th>
+            <th>Diagnostico</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Subtotal</th>
+            <th>IVA</th>
+            <th>Total</th>
+            <th>Generar PDF</th>
+        </tr>
+    </thead>
+    {% for atencion in lista_atenciones %}
+        <tr>
+            <td>{{atencion['cliente']}}</td>
+            <td>{{atencion['mascota']}}</td>
+            <td>{{atencion['diagnostico']}}</td>
+            <td>{{atencion['fecha']}}</td>
+            <td>{{atencion['hora']}}</td>
+            <td>{{atencion['subtotal']}}</td>
+            <td>{{atencion['iva']}}</td>
+            <td>{{atencion['total']}}</td>
+            <td><a href="/generar_pdf/atencion/{{atencion['id']}}" target="_blank">Generar PDF</a></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<table class="table table_hover table-dark" id="tabla_atencion" data-search="true">
+    <thead>
+      <tr>
+        <th data-field="cliente" data-sortable="true">Cliente</th>
+        <th data-field="mascota" data-sortable="true">Mascota</th>
+        <th data-field="diagnostico" data-sortable="true">Diagnostico</th>
+        <th data-field="fecha" data-sortable="true">Fecha</th>
+        <th data-field="hora" data-sortable="true">Hora</th>
+        <th data-field="subtotal" data-sortable="true">Subtotal</th>
+        <th data-field="iva" data-sortable="true">IVA</th>
+        <th data-field="total" data-sortable="true">Total</th>
+        <th data-field="url_generar_pdf" data-sortable="true">Generar PDF</th>
+      </tr>
+    </thead>
+</table>
+{% endif %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            type: "GET",
+            url: '/tabla_atenciones',
+            dataType: 'json',
+            success: function(data) {
+                $('#tabla_atencion').bootstrapTable({
+                    data: data
+                });
+            },
+            error: function(e) {
+                console.log(e.responseText);
+            }
+        });
+    });
+</script>
+{% endblock %}

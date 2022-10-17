@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Agregar medicina{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+<div class="centerAtencion1">
+        <h1>Agregar medicina</h1>
+        <p>{{mensaje}}</p>
+        <form action="" method="POST">
+            <div class="fecha">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="fecha">
+                <label for="descripcion">Descripción:</label>
+                <textarea rows="6" cols="48" id="descripcion" name="descripcion" placeholder="Esta medicina sirve para..." required></textarea>
+            </div>
+
+            <div class="fecha">
+                <label for="presentacion">Tipo de presentación:</label>
+                <input type="text" id="presentacion" name="presentacion"  placeholder="Pomada, Pastillas, Jarabe, ..." required>
+            </div>
+
+            <div class="fecha">
+                <label for="medida">Tipo de medida:</label>
+                <input type="text" id="medida" name="medida" placeholder="mg, ml, ..." required/>
+            </div>
+            <input type="submit"  class="submitButton" value="Agregar medicina">
+        </form>
+</div>
+{% endblock %}

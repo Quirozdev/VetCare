@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Modificar usuario{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+    {% if usuario_existente == True %}
+    <div class="center4">
+        <h1>Modificar a {{datos_usuario['nombre_corto']}}</h1>
+        <p>{{mensaje}}</p>
+        <form action="" method="POST">
+
+            <div class="fecha">
+                <label for="nombre_corto">Nombre corto</label>
+                <input type="text" id="nombre_corto" name="nombre_corto" value="{{datos_usuario['nombre_corto']}}" readonly>
+            </div>
+
+            <div class="fecha">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" value="{{datos_usuario['nombre']}}" required>
+            </div>
+
+            <div class="fecha">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{datos_usuario['email']}}" required>
+            </div>
+
+            <div class="tipoUsuario">
+                <label for="tipo">Tipo</label>
+                <select name="tipo" id="tipo" required>
+                    {% if datos_usuario['tipo'] == "Cliente" %}
+                    <option value="Cliente" selected>Cliente</option>
+                    {% else %}
+                    <option value="Cliente">Cliente</option>
+                    {% endif %}
+                    {% if datos_usuario['tipo'] == "Usuario" %}
+                    <option value="Usuario" selected>Usuario</option>
+                    {% else %}
+                    <option value="Usuario">Usuario</option>
+                    {% endif %}
+                    {% if datos_usuario['tipo'] == "Administrador" %}
+                    <option value="Administrador" selected>Administrador</option>
+                    {% else %}
+                    <option value="Administrador">Administrador</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            <input type="submit" class="submitButton" value="Modificar usuario">
+        </form>
+    </div>
+    {% else %}
+    <h2>Ese usuario no se encuentra registrado en el sistema</h2>
+    <a href="/usuarios/">Volver a la lista de usuarios</a>
+    {% endif %}
+{% endblock %}
